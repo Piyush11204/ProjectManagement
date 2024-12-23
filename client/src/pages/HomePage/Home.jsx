@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_PROJECTS } from '../queries/projectQueries';
-import { GET_CLIENTS } from '../queries/clientQueries';
-import Projects from '../components/ProjectComponents/Projects';
+import { GET_PROJECTS } from '../../queries/projectQueries';
+import { GET_CLIENTS } from '../../queries/clientQueries';
+import Projects from '../../components/ProjectComponents/Projects';
 import { 
   LayoutDashboard, 
   Users, 
@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   Clock
 } from 'lucide-react';
+import ProjectCharts from './ProjectCharts';
 
 const Home = () => {
   const { data: projectsData } = useQuery(GET_PROJECTS);
@@ -23,8 +24,8 @@ const Home = () => {
     
     return projectsData.projects.reduce((acc, project) => {
       acc.total++;
-      if (project.status === 'completed') acc.completed++;
-      else if (project.status === 'progress') acc.inProgress++;
+      if (project.status === 'Completed') acc.completed++;
+      else if (project.status === 'In Progress') acc.inProgress++;
       else acc.notStarted++;
       return acc;
     }, { total: 0, completed: 0, inProgress: 0, notStarted: 0 });
@@ -44,10 +45,10 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8 py-8">
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mb-8">
+          <div className="bg-white rounded-lg shadow-sm p-6 md:p-6 border border-gray-200">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Projects</p>
@@ -114,6 +115,11 @@ const Home = () => {
             <Users className="h-5 w-5 mr-2" />
             New Client
           </button>
+        </div>
+
+        {/* Charts for status */}
+        <div className="flex w-full flex-wrap gap-4 mb-8">
+          <ProjectCharts stats={stats} />
         </div>
 
         {/* Main Content */}

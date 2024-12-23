@@ -19,6 +19,7 @@ const ProjectType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
+  
     client: {
       type: ClientType,
       resolve(parent, args) {
@@ -122,6 +123,7 @@ const mutation = new GraphQLObjectType({
               new: { value: 'Not Started' },
               progress: { value: 'In Progress' },
               completed: { value: 'Completed' },
+              
             },
           }),
           defaultValue: 'Not Started',

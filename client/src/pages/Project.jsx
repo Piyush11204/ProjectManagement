@@ -19,6 +19,8 @@ const Project = () => {
   const { id } = useParams();
   const { loading, error, data } = useQuery(GET_PROJECT, { variables: { id } });
 
+  console.log(data);
+
   if (loading) return <Spinner />;
   if (error) return (
     <div className="flex items-center justify-center h-screen">
@@ -71,7 +73,7 @@ const Project = () => {
               </div>
 
               {/* Timeline Info */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-center space-x-2 text-gray-500">
                   <Calendar className="h-5 w-5" />
                   <span>Created: {new Date(project.createdAt).toLocaleDateString()}</span>
@@ -80,13 +82,13 @@ const Project = () => {
                   <Clock className="h-5 w-5" />
                   <span>Last Updated: {new Date(project.updatedAt).toLocaleDateString()}</span>
                 </div>
-              </div>
+              </div> */}
 
               {/* Client Info */}
               <div className="bg-gray-50 rounded-lg p-4">
                 <div className="flex items-center space-x-2 mb-4">
-                  <User className="h-5 w-5 text-blue-500" />
-                  <h2 className="text-lg font-medium text-gray-900">Client Information</h2>
+                  {/* <User className="h-5 w-5 text-blue-500" />
+                  <h2 className="text-lg font-medium text-gray-900">Client Information</h2> */}
                 </div>
                 <ClientInfo client={project.client} />
               </div>
